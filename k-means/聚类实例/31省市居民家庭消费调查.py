@@ -19,10 +19,20 @@ if __name__ == '__main__':
     # 生成数据散点图
     print(data)
     print(cityName)
+    # 生成数据散点图
+    dataSet=np.array(data)
+    print(dataSet[:,0])
+    plt.scatter(dataSet[:, 0], dataSet[:, 1], marker='o')
+    plt.show()
+
 
     km = KMeans(n_clusters=4)
     label = km.fit_predict(data)
     expenses = np.sum(km.cluster_centers_,axis=1)
+
+    plt.scatter(dataSet[:, 0], dataSet[:, 1], c=label)
+    plt.show()
+
 
     CityCluster=[[],[],[],[]]
     for i in range(len(cityName)):
