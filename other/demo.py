@@ -27,12 +27,14 @@ cpu = fluid.CPUPlace()
 exe = fluid.Executor(cpu)
 exe.run(fluid.default_startup_program())
 
+avg_cost_list=[]
 # 开始训练，迭代100次
 for i in range(10):
     outs = exe.run(
         feed={'x':train_data, 'y':y_true},
         fetch_list=[y_predict, avg_cost])
-    print(outs)
+    avg_cost_list.append(outs[1])
+    # print(outs)
 
 # 输出训练结果
-print (outs)
+print(avg_cost_list)

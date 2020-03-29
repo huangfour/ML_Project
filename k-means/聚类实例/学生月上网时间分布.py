@@ -24,14 +24,20 @@ print(onlinetimes)
 
 # 生成开始上网时间和在线时长的数据散点图
 dataSet=np.array(onlinetimes)
-plt.scatter(dataSet[:, 0], dataSet[:, 1], marker='o')
+fig, ax =plt.subplots()
+ax.plot(dataSet[:, 0], dataSet[:, 1], 'o')
+plt.xlabel("starttime")
+plt.ylabel("onlinetime")
 plt.show()
+
+
 
 # 利于DBSCAN对数据散点图进行基于密度的聚类
 real_X = np.array(onlinetimes).reshape((-1, 2))
 X = real_X[:, 0:1]
 db = skc.DBSCAN(eps=0.01, min_samples=20).fit(X)
 labels = db.labels_
+
 
 # 输出每个数据的簇标签，-1则表示为噪声点
 print('Labels:')
